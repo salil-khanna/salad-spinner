@@ -120,7 +120,7 @@ let displayMafia = totalSalads > 10000;
 
       <div className = "header2">
          <p >Salads per Second: {adjDisp(rate)} </p>  
-         <Button color = "lightGreen" text = 'Click to Add Salad!' onClick={() => onclick1(clickRate)} />       
+         <Button color = "limeGreen" text = 'Click to Add Salad!' onClick={() => onclick1(clickRate)} />       
        </div>
 
       <div className = "header2"> 

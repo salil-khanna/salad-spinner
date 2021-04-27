@@ -154,7 +154,7 @@ let displayMafia = totalSalads > 10000;
       <div > 
         <footer>
           Developed by Salil Khanna @ <a href="https://www.salilkhanna.com" 
-          target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer"> salilkhanna.com </a> with React JS
+          target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer"> salilkhanna.com</a> with React JS
         </footer>
       </div>
 

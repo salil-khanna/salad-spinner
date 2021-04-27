@@ -10,15 +10,15 @@ const ItemBuyer = ({itemName, rateOfProd, currentCount, currentCost, onClick}) =
 
     function adjDisp(valueToBeFixed) {
         if (valueToBeFixed > Math.pow(10,15) ) {
-            return roundTo(valueToBeFixed/Math.pow(10,15)) + " quad";
+            return roundTo(valueToBeFixed/Math.pow(10,15)) + "quad";
           } else if (valueToBeFixed > Math.pow(10,12) ) {
-            return roundTo(valueToBeFixed/Math.pow(10,12)) + " tril";
+            return roundTo(valueToBeFixed/Math.pow(10,12)) + "tril";
           } else if (valueToBeFixed > Math.pow(10,9) ) {
-            return roundTo(valueToBeFixed/Math.pow(10,9)) + " bil";
+            return roundTo(valueToBeFixed/Math.pow(10,9)) + "bil";
           } else if (valueToBeFixed > Math.pow(10,6) ) {
-            return roundTo(valueToBeFixed/Math.pow(10,6)) + " mil";
-          } else if (valueToBeFixed > Math.pow(10,4)) {
-            return roundTo(valueToBeFixed/Math.pow(10,3)) + " k";
+            return roundTo(valueToBeFixed/Math.pow(10,6)) + "mil";
+          } else if (valueToBeFixed > Math.pow(10,3)) {
+            return roundTo(valueToBeFixed/Math.pow(10,3)) + "k";
           } else {
             return valueToBeFixed;
           }

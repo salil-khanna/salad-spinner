@@ -8,6 +8,8 @@ import {useState, useEffect} from 'react'
 function App() {
 
 const [stopGame, setGameState] = useState(false);
+
+const [totalSalads, setTotal] = useState(0);
 const [count, setCount] = useState(0);
 const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
@@ -18,9 +20,12 @@ const [lunchLadies, setLady] = useState(0);
 const [lunchLadiesCost, setLadyCost] = useState(100);
 const [farms, setFarms] = useState(0);
 const [farmCost, setFarmCost] = useState(750);
+const [mafia, setMafia] = useState(0);
+const [mafiaCost, setMafiaCost] = useState(3000);
 
 function onclick1(addVal) {
   setCount(c => c + parseInt(addVal));
+  setTotal(c => c + parseInt(addVal));
 }
 
 function roundTo(num) {
@@ -30,6 +35,7 @@ function roundTo(num) {
 useEffect(() => {
    const timer = setInterval(() => {
       if (!stopGame) {
+          setTotal(c => roundTo(parseFloat(c) + parseFloat((rate/10.0))));
           setCount(c => roundTo(parseFloat(c) + parseFloat((rate/10.0))));
       }
   }, 100);
@@ -53,6 +59,7 @@ function resetGame() {
   setRate(0);
   setClickRate(1);
   setCount(0);
+  setTotal(0);
   setGameState(false);
 
   setSpinners(0);
@@ -61,6 +68,8 @@ function resetGame() {
   setLadyCost(100);
   setFarms(0);
   setFarmCost(750);
+  setMafia(0);
+  setMafiaCost(3000);
 
 }
 
@@ -92,6 +101,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   }
 }
 
+let displayMafia = totalSalads > 10000;
 
   return (
     <div className="container">
@@ -123,6 +133,18 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 
       <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} 
       currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/>
+
+      {
+       displayMafia && <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} 
+            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/>
+      } 
+      
+
+
+
+      <div className = "header2"> 
+        <p style= {{marginTop: 10, }}> <b>Keep Making Salads to Unlock More Items!! </b></p> 
+      </div>
 
     </div>
   );

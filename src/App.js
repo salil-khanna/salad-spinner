@@ -46,7 +46,7 @@ useEffect(() => {
   if (!rate) {
     setClickRate(1);
   } else {
-    setClickRate(Math.ceil(rate / 10))
+    setClickRate(Math.ceil(rate / 15))
   }
 }, [rate])
 
@@ -56,20 +56,24 @@ function changeGame() {
 }
 
 function resetGame() {
-  setRate(0);
-  setClickRate(1);
-  setCount(0);
-  setTotal(0);
-  setGameState(false);
+  if (window.confirm("Are you sure you want to reset your progress?")) {
+    setRate(0);
+    setClickRate(1);
+    setCount(0);
+    setTotal(0);
+    setGameState(false);
 
-  setSpinners(0);
-  setSpinnerCost(15);
-  setLady(0);
-  setLadyCost(100);
-  setFarms(0);
-  setFarmCost(750);
-  setMafia(0);
-  setMafiaCost(3000);
+    setSpinners(0);
+    setSpinnerCost(15);
+    setLady(0);
+    setLadyCost(100);
+    setFarms(0);
+    setFarmCost(750);
+    setMafia(0);
+    setMafiaCost(3000);
+  }
+
+  
 
 }
 
@@ -144,6 +148,14 @@ let displayMafia = totalSalads > 10000;
 
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>Keep Making Salads to Unlock More Items!! </b></p> 
+      </div>
+
+
+      <div > 
+        <footer>
+          Developed by Salil Khanna @ <a href="https://www.salilkhanna.com" 
+          target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer"> salilkhanna.com </a>
+        </footer>
       </div>
 
     </div>

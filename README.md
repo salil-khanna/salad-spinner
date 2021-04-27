@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Salad Spinner: A Healthy Alternative to Cookie Clicker (A React JS application)
+
+One day during finals I became overally obssed with the game cookie clicker, [Shown Here](https://orteil.dashnet.org/cookieclicker/), and I wanted to create a replica, not only to play for my own fun, but to also practice my JavaScript skills, but as well as learning the React Framework along the way.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -129,26 +129,28 @@ let displayMafia = totalSalads > 10000;
 
 
 
-      <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} 
+      <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} 
       currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/>
 
-      <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} 
+      <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} 
       currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/>
 
-      <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} 
+      <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} 
       currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/>
 
+
+
       {
-       displayMafia && <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} 
+       displayMafia && <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
             currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/>
       } 
       
 
 
-
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>Keep Making Salads to Unlock More Items!! </b></p> 
       </div>
+
 
 
       <div > 

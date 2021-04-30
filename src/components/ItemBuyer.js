@@ -1,7 +1,7 @@
 import Button from './Button'
 
 
-const ItemBuyer = ({itemName, rateOfProd, currentCount, currentCost, onClick}) => {
+const ItemBuyer = ({itemName, rateOfProd, currentCount, currentCost, onClick, saladCount}) => {
 
 
     function roundTo(num) {
@@ -27,7 +27,9 @@ const ItemBuyer = ({itemName, rateOfProd, currentCount, currentCost, onClick}) =
     return (
     <div className = "header2">
         <p > <b>{itemName}</b>: Produces {rateOfProd} Salads per Second (Current Count = {currentCount}) </p>
-        <Button text = {"Click to Buy For " + adjDisp(currentCost) + " salads"} onClick={onClick} />
+        <Button text = {"Click to Buy For " + adjDisp(currentCost) + " salads"} onClick={onClick} 
+          color = {saladCount >= currentCost ? "green" : "red"}
+        />
       </div>
     )
 }

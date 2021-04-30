@@ -10,6 +10,7 @@ function App() {
 const [stopGame, setGameState] = useState(false);
 
 const [totalSalads, setTotal] = useState(0);
+
 const [count, setCount] = useState(0);
 const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
@@ -126,9 +127,12 @@ function unknownItem(unlock, prevItem) {
     if (count > 15000 && town === -1) {
       setTown(0);
       setUnlockables(c => c - 1)
+      console.log(totalSalads);
     }
 
-  }, [count, mafia, town])
+    
+
+  }, [count, mafia, town, totalSalads])
 
   function displayItem(unlockVal) {
     return unlockVal !== -1;

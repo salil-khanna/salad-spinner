@@ -14,14 +14,18 @@ const [count, setCount] = useState(0);
 const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
 
+const [unlockables, setUnlockables] = useState(2);
+
 const [handSpinners, setSpinners] = useState(0);
 const [handSpinnersCost, setSpinnerCost] = useState(15);
 const [lunchLadies, setLady] = useState(0);
 const [lunchLadiesCost, setLadyCost] = useState(100);
 const [farms, setFarms] = useState(0);
-const [farmCost, setFarmCost] = useState(750);
-const [mafia, setMafia] = useState(0);
-const [mafiaCost, setMafiaCost] = useState(3000);
+const [farmCost, setFarmCost] = useState(1100);
+const [mafia, setMafia] = useState(-1);
+const [mafiaCost, setMafiaCost] = useState(6000);
+const [town, setTown] = useState(-1);
+const [townCost, setTownCost] = useState(20000);
 
 function onclick1(addVal) {
   setCount(c => c + parseInt(addVal));
@@ -50,7 +54,6 @@ useEffect(() => {
   }
 }, [rate])
 
-
 function changeGame() {
   setGameState(!stopGame);
 }
@@ -63,17 +66,19 @@ function resetGame() {
     setTotal(0);
     setGameState(false);
 
+    setUnlockables(2);
+
     setSpinners(0);
     setSpinnerCost(15);
     setLady(0);
     setLadyCost(100);
     setFarms(0);
-    setFarmCost(750);
-    setMafia(0);
-    setMafiaCost(3000);
-  }
-
-  
+    setFarmCost(1100);
+    setMafia(-1);
+    setMafiaCost(6000);
+    setTown(-1);
+    setTownCost(20000);
+  } 
 
 }
 
@@ -91,8 +96,8 @@ function adjDisp(valueToBeFixed) {
   } else {
     return valueToBeFixed;
   }
-
 }
+
 
 function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   if (cost > count) {
@@ -105,7 +110,29 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   }
 }
 
-let displayMafia = totalSalads > 10000;
+function unknownItem(unlock, prevItem) {
+  return (
+    prevItem > -1 && <div className = "header2">
+        <p > <b>???</b> Unlocks at {unlock} total salads </p>
+      </div>
+  );
+}
+
+  useEffect(() => {
+    if (count > 5000 && mafia === -1) {
+      setMafia(0);
+      setUnlockables(c => c - 1)
+    }
+    if (count > 15000 && town === -1) {
+      setTown(0);
+      setUnlockables(c => c - 1)
+    }
+
+  }, [count, mafia, town])
+
+  function displayItem(unlockVal) {
+    return unlockVal !== -1;
+  }
 
   return (
     <div className="container">
@@ -116,8 +143,8 @@ let displayMafia = totalSalads > 10000;
       <div className = "header2">
         <p>Total Salads: {adjDisp(count)} </p>        
       </div>
-      {/* Add an image to click instead of a button to manually create salads */}
 
+      {/* Add an image to click instead of a button to manually create salads */}
       <div className = "header2">
          <p >Salads per Second: {adjDisp(rate)} </p>  
          <Button color = "limeGreen" text = 'Click to Add Salad!' onClick={() => onclick1(clickRate)} />       
@@ -126,7 +153,6 @@ let displayMafia = totalSalads > 10000;
       <div className = "header2"> 
         <p>Salads per Click: {adjDisp(clickRate)}</p> 
       </div>
-
 
 
       <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} 
@@ -138,25 +164,28 @@ let displayMafia = totalSalads > 10000;
       <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} 
       currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/>
 
-
+      {
+       displayItem(mafia) ? <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
+            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> : unknownItem(5000, handSpinners)
+      } 
 
       {
-       displayMafia && <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
-            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/>
+       displayItem(town) ? <ItemBuyer itemName="Tomato Town" rateOfProd = {500} currentCount = {town} saladCount = {count} 
+            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> : unknownItem(15000, mafia)
       } 
-      
-
 
       <div className = "header2"> 
-        <p style= {{marginTop: 10, }}> <b>Keep Making Salads to Unlock More Items!! </b></p> 
+        <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 
+        `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
       </div>
-
-
 
       <div > 
         <footer>
           Developed by Salil Khanna @ <a href="https://www.salilkhanna.com" 
           target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer"> salilkhanna.com</a> with React JS
+          <br></br>
+          <a href="https://github.com/salil-khanna/salad-spinner" target= "_blank" style = {{color:"goldenrod"}} 
+          rel="noreferrer"> View the Code Here </a>
         </footer>
       </div>
 

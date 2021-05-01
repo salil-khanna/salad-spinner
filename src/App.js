@@ -165,7 +165,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
     <div className="container">
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame}/>
       
-
+      <p className="header3"> <b>Salad Stats</b></p>
 
       {/* turn this into a component */}
       <div className = "header2">

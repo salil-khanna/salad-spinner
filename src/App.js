@@ -5,6 +5,7 @@ import ItemBuyer from './components/ItemBuyer'
 import {useState, useEffect} from 'react'
 import { useSpring, animated as a} from 'react-spring'
 import UnknownItem from './components/UnknownItem';
+import swal from 'sweetalert';
 
 function App() {
 
@@ -28,6 +29,24 @@ const [mafia, setMafia] = useState(-1);
 const [mafiaCost, setMafiaCost] = useState(6000);
 const [town, setTown] = useState(-1);
 const [townCost, setTownCost] = useState(20000);
+
+
+useEffect(() => {
+  setTimeout(() => {
+    swal({
+      title: "Welcome to Salad Spinner!",
+      text: `As the healthy alternative to cookie clicker, this site does not use cookies to keep track of or save any progress,
+            so make sure not to close out the tab if you want to save your salads! Thanks for playing my game! 
+            Signed, Salil`,
+      className: "intro",
+      closeOnClickOutside: false,
+      button: "Lets get Spinning!",
+    });
+  }, 1300);
+
+}, [])
+
+
 
 function onclick1(addVal) {
   setCount(c => c + parseInt(addVal));
@@ -60,8 +79,16 @@ function changeGame() {
   setGameState(!stopGame);
 }
 
-function resetGame() {
-  if (window.confirm("Are you sure you want to reset your progress?")) {
+async function resetGame() {
+
+  const willDelete = await swal({
+    title: "Are you sure you want to reset your progress?",
+    icon: "warning",
+    dangerMode: true,
+    buttons: ["Cancel", "Ok"],
+  });
+  
+  if (willDelete) {
     setRate(0);
     setClickRate(1);
     setCount(0);
@@ -80,7 +107,8 @@ function resetGame() {
     setMafiaCost(6000);
     setTown(-1);
     setTownCost(20000);
-  } 
+    swal("Your game has been reset!", "", "success");
+  }
 
 }
 
@@ -103,7 +131,7 @@ function adjDisp(valueToBeFixed) {
 
 function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   if (cost > count) {
-    alert('Not enough salads to purchase item!');
+    swal('Not enough salads to purchase item!');
   } else {
     setCount(c => roundTo(c - cost))
     setRate(c => c + rateAdj);
@@ -111,17 +139,6 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
     itemNumAdj(c => c + 1);
   }
 }
-
-// function unknownItem(unlock, prevItem) {
-//   return (
-//     prevItem > -1 && 
-
-//     <div className = "header2">
-//         <p > <b>???</b> Unlocks at {unlock} total salads </p>
-//       </div>
-
-//   );
-// }
 
   useEffect(() => {
     if (count > 5000 && mafia === -1) {

@@ -78,3 +78,39 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+.intro .swal-text {
+  background-color: #FEFAE3;
+  padding: 18px;
+  border: 1px solid #F0E1A1;
+  display: block;
+  margin: 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #61534e;
+}
+
+.intro .swal-title {
+  
+  font-size: 30px;
+  font-style: bold;
+  text-align: center;
+ 
+}
+
+@media screen and (min-width: 800px) {
+  .intro {
+    width:800px !important;
+  
+  }
+}
+
+
+.intro .swal-button {
+  background-color: goldenrod;
+}
+
+.intro .swal-button:hover {
+  background-color: goldenrod;
+}
+

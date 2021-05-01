@@ -35,8 +35,8 @@ useEffect(() => {
   setTimeout(() => {
     swal({
       title: "Welcome to Salad Spinner!",
-      text: `As the healthy alternative to cookie clicker, this site does not use cookies to keep track of any progress,
-            so make sure not to close out the tab if you want to save your salads! Thanks for playing my game! 
+      text: `As the healthy alternative to cookie clicker, this site does not use cookies to keep track of any progress, so make sure not to close out the tab if you want to save your salads! 
+            Thanks for playing my game :D 
             Signed, Salil`,
       className: "intro",
       closeOnClickOutside: false,

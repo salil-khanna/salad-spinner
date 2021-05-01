@@ -3,7 +3,8 @@ import Header from './components/Header'
 import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
 import {useState, useEffect} from 'react'
-
+import { useSpring, animated as a} from 'react-spring'
+import UnknownItem from './components/UnknownItem';
 
 function App() {
 
@@ -111,13 +112,16 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   }
 }
 
-function unknownItem(unlock, prevItem) {
-  return (
-    prevItem > -1 && <div className = "header2">
-        <p > <b>???</b> Unlocks at {unlock} total salads </p>
-      </div>
-  );
-}
+// function unknownItem(unlock, prevItem) {
+//   return (
+//     prevItem > -1 && 
+
+//     <div className = "header2">
+//         <p > <b>???</b> Unlocks at {unlock} total salads </p>
+//       </div>
+
+//   );
+// }
 
   useEffect(() => {
     if (count > 5000 && mafia === -1) {
@@ -138,11 +142,14 @@ function unknownItem(unlock, prevItem) {
     return unlockVal !== -1;
   }
 
+
+
   return (
     <div className="container">
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame}/>
       
-      <p className="header3"> <b>Salad Stats</b></p>
+
+
       {/* turn this into a component */}
       <div className = "header2">
         <p>Total Salads: {adjDisp(count)} </p>        
@@ -159,29 +166,35 @@ function unknownItem(unlock, prevItem) {
       </div>
 
 
-      <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} 
-      currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/>
+        <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} delayAmount = {100}
+        currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/>
 
-      <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} 
-      currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/>
-
-      <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} 
+      
+        <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} delayAmount = {400}
+        currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/>
+      
+      <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} delayAmount = {700}
       currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/>
-
+    
+    <a.div style = {useSpring({from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 1000 }, delay: 1000, }) }>
       {
        displayItem(mafia) ? <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
-            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> : unknownItem(5000, handSpinners)
+            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> : <UnknownItem unlock = {5000}/>
       } 
-
+      </a.div>
+      
       {
        displayItem(town) ? <ItemBuyer itemName="Tomato Town" rateOfProd = {500} currentCount = {town} saladCount = {count} 
-            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> : unknownItem(15000, mafia)
-      } 
+            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> : mafia > -1 && <UnknownItem unlock = {15000} />
 
+      } 
+       
+      
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
       </div>
+     
 
       <div > 
         <footer>

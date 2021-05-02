@@ -4,6 +4,7 @@ import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
 import {useState, useEffect} from 'react'
 import UnknownItem from './components/UnknownItem';
+import AchievementHandler from './components/AchievementHandler';
 import swal from 'sweetalert';
 import { toast, ToastContainer } from "react-toastify";
 
@@ -20,6 +21,7 @@ const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
 
 const [unlockables, setUnlockables] = useState(4);
+const [reset, setReset] = useState(false);
 
 const [handSpinners, setSpinners] = useState(0);
 const [handSpinnersCost, setSpinnerCost] = useState(15);
@@ -31,6 +33,8 @@ const [mafia, setMafia] = useState(-1);
 const [mafiaCost, setMafiaCost] = useState(6000);
 const [town, setTown] = useState(-1);
 const [townCost, setTownCost] = useState(20000);
+
+
 
 
 useEffect(() => {
@@ -91,10 +95,11 @@ async function resetGame() {
   });
   
   if (willDelete) {
+    setReset(true);
+    setTotal(0);
     setRate(0);
     setClickRate(1);
     setCount(0);
-    setTotal(0);
     setGameState(false);
 
     setUnlockables(4);
@@ -109,7 +114,9 @@ async function resetGame() {
     setMafiaCost(6000);
     setTown(-1);
     setTownCost(20000);
-    swal("Your game has been reset!", "", "success");
+
+    await swal("Your game has been reset!", "", "success");
+    setReset(false);
   }
 
 }
@@ -130,7 +137,14 @@ function adjDisp(valueToBeFixed) {
   }
 }
 
-
+/**
+ * All the changes to be made when a new item is bought
+ * 
+ * @param {*} cost cost of the items
+ * @param {*} rateAdj how much to increase the rate of production by
+ * @param {*} itemCostAdj the corresponding function which allows the new cost to be set
+ * @param {*} itemNumAdj the correspond function which allows the new number of items to be set
+ */
 function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   if (cost > count) {
     toast.error('Not enough Salads to purchase item !', {
@@ -150,6 +164,9 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   }
 }
 
+/**
+ * Use Effect is for unlocking items
+ */
   useEffect(() => {
     if (count >= 10 && lunchLadies === -1) {
       setLady(0);
@@ -168,12 +185,9 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
     if (count >= 15000 && town === -1) {
       setTown(0);
       setUnlockables(c => c - 1)
-      console.log(totalSalads);
     }
 
-    
-
-  }, [count, lunchLadies, farms, mafia, town, totalSalads])
+  }, [count, lunchLadies, farms, mafia, town])
 
   function displayItem(unlockVal) {
     return unlockVal !== -1;
@@ -250,6 +264,12 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 
       } 
        
+       <AchievementHandler stopGame = {stopGame} totalSalads = {totalSalads} count = {count} rate = {rate} 
+        clickRate = {clickRate} unlockables = {unlockables} handSpinners = {handSpinners} handSpinnersCost = {handSpinnersCost}
+        lunchLadies = {lunchLadies} lunchLadiesCost = {lunchLadiesCost} farms = {farms} farmCost = {farmCost}
+        mafia = {mafia} mafiaCost = {mafiaCost} town = {town} townCost = {townCost} 
+        
+       reset = {reset}/>
       
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 

@@ -3,7 +3,6 @@ import Header from './components/Header'
 import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
 import {useState, useEffect} from 'react'
-import { useSpring, animated as a} from 'react-spring'
 import UnknownItem from './components/UnknownItem';
 import swal from 'sweetalert';
 import { toast, ToastContainer } from "react-toastify";
@@ -20,13 +19,13 @@ const [count, setCount] = useState(0);
 const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
 
-const [unlockables, setUnlockables] = useState(2);
+const [unlockables, setUnlockables] = useState(4);
 
 const [handSpinners, setSpinners] = useState(0);
 const [handSpinnersCost, setSpinnerCost] = useState(15);
-const [lunchLadies, setLady] = useState(0);
+const [lunchLadies, setLady] = useState(-1);
 const [lunchLadiesCost, setLadyCost] = useState(100);
-const [farms, setFarms] = useState(0);
+const [farms, setFarms] = useState(-1);
 const [farmCost, setFarmCost] = useState(1100);
 const [mafia, setMafia] = useState(-1);
 const [mafiaCost, setMafiaCost] = useState(6000);
@@ -45,7 +44,7 @@ useEffect(() => {
       closeOnClickOutside: false,
       button: "Lets get Spinning!",
     });
-  }, 1300);
+  }, 1100);
 
 }, [])
 
@@ -98,13 +97,13 @@ async function resetGame() {
     setTotal(0);
     setGameState(false);
 
-    setUnlockables(2);
+    setUnlockables(4);
 
     setSpinners(0);
     setSpinnerCost(15);
-    setLady(0);
+    setLady(-1);
     setLadyCost(100);
-    setFarms(0);
+    setFarms(-1);
     setFarmCost(1100);
     setMafia(-1);
     setMafiaCost(6000);
@@ -152,11 +151,21 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 }
 
   useEffect(() => {
-    if (count > 5000 && mafia === -1) {
+    if (count >= 10 && lunchLadies === -1) {
+      setLady(0);
+      setUnlockables(c => c - 1)
+    }
+
+    if (count >= 500 && farms === -1) {
+      setFarms(0);
+      setUnlockables(c => c - 1)
+    }
+
+    if (count >= 5000 && mafia === -1) {
       setMafia(0);
       setUnlockables(c => c - 1)
     }
-    if (count > 15000 && town === -1) {
+    if (count >= 15000 && town === -1) {
       setTown(0);
       setUnlockables(c => c - 1)
       console.log(totalSalads);
@@ -164,12 +173,15 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 
     
 
-  }, [count, mafia, town, totalSalads])
+  }, [count, lunchLadies, farms, mafia, town, totalSalads])
 
   function displayItem(unlockVal) {
     return unlockVal !== -1;
   }
 
+  function displayUnknown(prevVal) {
+    return prevVal > -1;
+  }
 
 
   return (
@@ -207,28 +219,34 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
       </div>
 
 
-
-
         <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} delayAmount = {100}
-        currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/>
+        currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/> 
+
+    
+       { displayItem(lunchLadies) ? <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} 
+        currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/> 
+        : <UnknownItem unlock = {10} delayVal = {600}/> 
+        }
+   
 
       
-        <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} delayAmount = {400}
-        currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/>
-      
-      <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} delayAmount = {700}
-      currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/>
+     { displayItem(farms) ? <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} 
+      currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/> 
+      : <UnknownItem unlock = {500} delayVal = {1100}/> 
+      }
     
-    <a.div style = {useSpring({from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 1000 }, delay: 1000, }) }>
+    
       {
        displayItem(mafia) ? <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
-            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> : <UnknownItem unlock = {5000}/>
+            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> 
+            : displayUnknown(lunchLadies) && <UnknownItem unlock = {5000} />
       } 
-      </a.div>
+      
       
       {
        displayItem(town) ? <ItemBuyer itemName="Tomato Town" rateOfProd = {500} currentCount = {town} saladCount = {count} 
-            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> : mafia > -1 && <UnknownItem unlock = {15000} />
+            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> 
+            : displayUnknown(farms) && <UnknownItem unlock = {15000} />
 
       } 
        

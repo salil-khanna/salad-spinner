@@ -6,6 +6,9 @@ import {useState, useEffect} from 'react'
 import { useSpring, animated as a} from 'react-spring'
 import UnknownItem from './components/UnknownItem';
 import swal from 'sweetalert';
+import { toast, ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -36,8 +39,8 @@ useEffect(() => {
     swal({
       title: "Welcome to Salad Spinner!",
       text: `As the healthy alternative to cookie clicker, this site does not use cookies to keep track of any progress, so make sure not to close out the tab if you want to save your salads! 
-            Thanks for playing my game :D 
-            Signed, Salil`,
+      Thanks for playing my game :D 
+      Signed, Salil`,
       className: "intro",
       closeOnClickOutside: false,
       button: "Lets get Spinning!",
@@ -131,7 +134,15 @@ function adjDisp(valueToBeFixed) {
 
 function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   if (cost > count) {
-    swal('Not enough salads to purchase item!');
+    toast.error('Not enough Salads to purchase item !', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      });
   } else {
     setCount(c => roundTo(c - cost))
     setRate(c => c + rateAdj);
@@ -164,6 +175,19 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   return (
     <div className="container">
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame}/>
+
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
       
       <p className="header3"> <b>Salad Stats</b></p>
 
@@ -181,6 +205,8 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
       <div className = "header2"> 
         <p>Salads per Click: {adjDisp(clickRate)}</p> 
       </div>
+
+
 
 
         <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} delayAmount = {100}

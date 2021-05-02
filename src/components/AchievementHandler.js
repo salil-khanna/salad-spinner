@@ -72,11 +72,6 @@ farms, farmCost, mafia, mafiaCost, town, townCost, reset}) => {
             text: "Own 1 Town: Fortnite x Salad Spinner When?",
             found: false,
         },
-        {
-            key: 13,
-            text: "Visit My Site: How thoughtful of you <3",
-            found: false,
-        },
         
 
     ], [])
@@ -146,7 +141,7 @@ farms, farmCost, mafia, mafiaCost, town, townCost, reset}) => {
             adjustAchievements(69);
         }
 
-        if (achievementsNum === 14) {
+        if (achievementsNum === 13) {
             adjustAchievements(6);
         }
 

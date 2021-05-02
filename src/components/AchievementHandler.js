@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const AchievementHandler = 
 ({stopGame, totalSalads, count, rate, clickRate, unlockables, 
     handSpinners, handSpinnersCost, lunchLadies, lunchLadiesCost,
-farms, farmCost, mafia, mafiaCost, town, townCost, reset, viewPage}) => {
+farms, farmCost, mafia, mafiaCost, town, townCost, reset}) => {
 
     const achievementList = useMemo(() => [
         {
@@ -120,7 +120,7 @@ farms, farmCost, mafia, mafiaCost, town, townCost, reset, viewPage}) => {
         setAchievements(result);
       }, [achievements])
 
-      useEffect((achievementList) => {
+      useEffect(() => {
         if (totalSalads === 1) {
             adjustAchievements(1);
         }
@@ -146,7 +146,7 @@ farms, farmCost, mafia, mafiaCost, town, townCost, reset, viewPage}) => {
             adjustAchievements(69);
         }
 
-        if (achievementsNum === achievements.length) {
+        if (achievementsNum === 14) {
             adjustAchievements(6);
         }
 
@@ -174,14 +174,11 @@ farms, farmCost, mafia, mafiaCost, town, townCost, reset, viewPage}) => {
             adjustAchievements(12);
         }
 
-        if (viewPage) {
-            adjustAchievements(13);
-        }
       
       }, [stopGame, totalSalads, count, rate, clickRate, unlockables, 
         handSpinners, handSpinnersCost, lunchLadies, lunchLadiesCost,
-        farms, farmCost, mafia, mafiaCost, town, townCost, achievements, 
-        achievementsNum, reset, adjustAchievements, viewPage])
+        farms, farmCost, mafia, mafiaCost, town, townCost, achievementsNum, reset, 
+        adjustAchievements])
 
     return (
         <div>

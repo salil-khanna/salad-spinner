@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import Button from './Button';
 
-const Header = ({onClick, stopGame, pauseGame, viewPageFunc}) => {
+const Header = ({onClick, stopGame, pauseGame}) => {
     
 
     return (
@@ -12,7 +12,7 @@ const Header = ({onClick, stopGame, pauseGame, viewPageFunc}) => {
             <Button text = {stopGame ? 'Play' : 'Pause'} onClick={pauseGame} color = 'black'/>
             <Button text = 'Reset Game' onClick={onClick} color = 'black'/>
             <a href="https://www.salilkhanna.com" rel="noreferrer"
-             target= "_blank" style = {{backgroundColor : 'goldenrod'}} onClick = {viewPageFunc} className= 'btn'>
+             target= "_blank" style = {{backgroundColor : 'goldenrod'}} className= 'btn'>
                 Salil's Personal Page
             </a>  
             

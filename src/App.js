@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
 
 const [stopGame, setGameState] = useState(false);
-const [viewPage, setViewPage] = useState(false);
 
 const [totalSalads, setTotal] = useState(0);
 
@@ -99,7 +98,6 @@ async function resetGame() {
     setClickRate(1);
     setCount(0);
     setGameState(false);
-    setViewPage(false);
 
     setUnlockables(4);
 
@@ -200,7 +198,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 
   return (
     <div className="container">
-      <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} viewPageFunc = {setViewPage(true)}/>
+      <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} />
 
 
       <ToastContainer
@@ -269,7 +267,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
         lunchLadies = {lunchLadies} lunchLadiesCost = {lunchLadiesCost} farms = {farms} farmCost = {farmCost}
         mafia = {mafia} mafiaCost = {mafiaCost} town = {town} townCost = {townCost} 
         
-       viewPage = {viewPage} reset = {reset}/>
+       reset = {reset}/>
       
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 
@@ -280,8 +278,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
       <div > 
         <footer>
           Developed by Salil Khanna @ <a href="https://www.salilkhanna.com" 
-          target= "_blank" onClick = {setViewPage(true)} style = {{color:"goldenrod"}} rel="noreferrer"> 
-          salilkhanna.com</a> with React JS
+          target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer"> salilkhanna.com</a> with React JS
           <br></br>
           <a href="https://github.com/salil-khanna/salad-spinner" target= "_blank" style = {{color:"goldenrod"}} 
           rel="noreferrer"> View the Code Here </a>

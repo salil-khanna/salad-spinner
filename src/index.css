@@ -98,9 +98,9 @@ footer {
  
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 825px) {
   .intro {
-    width:800px !important;
+    width:825px !important;
   
   }
 }

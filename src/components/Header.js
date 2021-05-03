@@ -3,6 +3,7 @@ import Button from './Button';
 
 const Header = ({onClick, stopGame, pauseGame}) => {
     
+    
 
     return (
         <header className= 'header'>

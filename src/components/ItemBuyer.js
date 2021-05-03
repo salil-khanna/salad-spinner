@@ -3,6 +3,7 @@ import { useSpring, animated as a} from 'react-spring'
 
 const ItemBuyer = ({itemName, rateOfProd, currentCount, currentCost, onClick, saladCount, delayAmount}) => {
 
+    
 
     function roundTo(num) {
         return +(Math.round(num + "e+3")  + "e-3");

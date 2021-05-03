@@ -2,9 +2,8 @@ import './App.css';
 import Header from './components/Header'
 import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
-import {useState, useEffect} from 'react'
+import {useState, useEffect } from 'react'
 import UnknownItem from './components/UnknownItem';
-import AchievementHandler from './components/AchievementHandler';
 import swal from 'sweetalert';
 import { toast, ToastContainer } from "react-toastify";
 
@@ -21,7 +20,6 @@ const [rate, setRate] = useState(0);
 const [clickRate, setClickRate] = useState(1);
 
 const [unlockables, setUnlockables] = useState(4);
-const [reset, setReset] = useState(false);
 
 const [handSpinners, setSpinners] = useState(0);
 const [handSpinnersCost, setSpinnerCost] = useState(15);
@@ -34,6 +32,113 @@ const [mafiaCost, setMafiaCost] = useState(6000);
 const [town, setTown] = useState(-1);
 const [townCost, setTownCost] = useState(20000);
 
+////////////////////////////////////////////////////////////////////////
+    ////////////////////////// SECTION FOR ACHIEVEMENTS CODE ///////////////
+    ////////////////////////////////////////////////////////////////////////
+    const achievementList = [
+      {
+          key: 1,
+          text: "Your first salad! They grow up so fast :')",
+          found: false,
+      },
+      {
+          key: 2,
+          text: "Own 1 Salad Spinner: We All Start Somewhere",
+          found: false,
+      }, 
+      {
+          key: 3,
+          text: "You unlocked all items! Now touch some grass",
+          found: false,
+      },
+      {
+          key: 4,
+          text: "5 achievements: You've hit the big leagues!",
+          found: false,
+      },
+      {
+          key: 5,
+          text: "Pausing the Game: Bathroom break I guess?",
+          found: false,
+      },
+      {
+          key: 69,
+          text: "Nice.",
+          found: false,
+      },
+      {
+          key: 6,
+          text: "Unlocked All Achievements: Go home, I'm out of things for you to do",
+          found: false,
+      },
+      {
+        key: 7,
+        text: "Salads per Second > 50: Now this is spinning out of control...",
+        found: false,
+    },
+    {
+        key: 8,
+        text: "Salads per Click > 10: Your fingers must be tired",
+        found: false,
+    }, 
+      {
+          key: 9,
+          text: "Own 1 Lunch Lady: Whats for lunch?",
+          found: false,
+      },
+      {
+          key: 10,
+          text: "Own 1 Farm: Land Development!",
+          found: false,
+      },
+      {
+          key: 11,
+          text: "Own 1 Mafia: Am I in debt??",
+          found: false,
+      },
+      {
+          key: 12,
+          text: "Own 1 Town: Fortnite x Salad Spinner When?",
+          found: false,
+      },
+      {
+        key: 13,
+        text: "Pass 10k All Time Salads: Started from the bottom now we here.",
+        found: false,
+    },
+    ];
+    const [achievements, setAchievements] = useState(achievementList)
+    const [achievementsNum, setAchievementsNum] = useState(0);
+
+    function achievementToastGen(text) {
+      setAchievementsNum(c => c + 1);
+      return toast.dark(text, {
+        position: "bottom-center",
+        autoClose: 20000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        });
+        
+    }
+
+    const adjustAchievements = (val) => {
+     setAchievements( achievements.filter( (achievement) => {
+          return !achievement.found
+      }).map( (achievement) => {
+          if (achievement.key === val) {
+              achievementToastGen(achievement.text)
+              return {...achievement, found: true}
+          } else {
+              return achievement;
+          }
+      }))
+}
+
+
+    ///////////////////////////////////////////////////////////////////
 
 useEffect(() => {
   setTimeout(() => {
@@ -52,8 +157,12 @@ useEffect(() => {
 
 
 function onclick1(addVal) {
+  if (totalSalads === 0) {
+    adjustAchievements(1);
+  }
   setCount(c => c + parseInt(addVal));
   setTotal(c => c + parseInt(addVal));
+
 }
 
 function roundTo(num) {
@@ -70,6 +179,7 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, [stopGame, rate]);
 
+
 useEffect(() => {
   if (!rate) {
     setClickRate(1);
@@ -80,44 +190,10 @@ useEffect(() => {
 
 function changeGame() {
   setGameState(!stopGame);
+  adjustAchievements(5);
 }
 
-async function resetGame() {
 
-  const willDelete = await swal({
-    title: "Are you sure you want to reset your progress?",
-    icon: "warning",
-    dangerMode: true,
-    buttons: ["Cancel", "Ok"],
-  });
-  
-  if (willDelete) {
-    
-    setTotal(0);
-    setRate(0);
-    setClickRate(1);
-    setCount(0);
-    setGameState(false);
-
-    setUnlockables(4);
-
-    setSpinners(0);
-    setSpinnerCost(15);
-    setLady(-1);
-    setLadyCost(100);
-    setFarms(-1);
-    setFarmCost(1100);
-    setMafia(-1);
-    setMafiaCost(6000);
-    setTown(-1);
-    setTownCost(20000);
-
-    setReset(true);
-    await swal("Your game has been reset!", "", "success");
-    setReset(false);
-  }
-
-}
 
 function adjDisp(valueToBeFixed) {
    if (valueToBeFixed > Math.pow(10,15) ) {
@@ -143,7 +219,7 @@ function adjDisp(valueToBeFixed) {
  * @param {*} itemCostAdj the corresponding function which allows the new cost to be set
  * @param {*} itemNumAdj the correspond function which allows the new number of items to be set
  */
-function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
+function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, itemName) {
   if (cost > count) {
     toast.error('Not enough Salads to purchase item !', {
       position: "top-center",
@@ -155,11 +231,20 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
       progress: undefined,
       });
   } else {
+    if (item === 0) {
+      if (itemName === "Hand Spinners") {
+        adjustAchievements(2);
+      }
+    }
+
     setCount(c => roundTo(c - cost))
     setRate(c => c + rateAdj);
     itemCostAdj(c => roundTo(c * 1.1));
     itemNumAdj(c => c + 1);
+    
   }
+
+  
 }
 
 /**
@@ -184,6 +269,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
       setTown(0);
       setUnlockables(c => c - 1)
     }
+    
 
   }, [count, lunchLadies, farms, mafia, town])
 
@@ -196,8 +282,50 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
   }
 
 
+
+    async function resetGame() {
+
+      const willDelete = await swal({
+        title: "Are you sure you want to reset your progress?",
+        icon: "warning",
+        dangerMode: true,
+        buttons: ["Cancel", "Ok"],
+      });
+      
+      if (willDelete) {
+        
+        setTotal(0);
+        setRate(0);
+        setClickRate(1);
+        setCount(0);
+        setGameState(false);
+    
+        setUnlockables(4);
+    
+        setSpinners(0);
+        setSpinnerCost(15);
+        setLady(-1);
+        setLadyCost(100);
+        setFarms(-1);
+        setFarmCost(1100);
+        setMafia(-1);
+        setMafiaCost(6000);
+        setTown(-1);
+        setTownCost(20000);
+    
+        setAchievements(achievementList);
+        setAchievementsNum(0);
+        await swal("Your game has been reset!", "", "success");
+        
+      }
+    
+    }
+
+
   return (
+     
     <div className="container">
+     
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} />
 
 
@@ -232,46 +360,44 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj) {
 
 
         <ItemBuyer itemName="Hand Spinners" rateOfProd = {1} currentCount = {handSpinners} saladCount = {count} delayAmount = {100}
-        currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners)}/> 
+        currentCost = {handSpinnersCost} onClick={() => buyItem(handSpinnersCost, 1, setSpinnerCost, setSpinners, handSpinners, "Hand Spinners")} /> 
 
     
        { displayItem(lunchLadies) ? <ItemBuyer itemName="Lunch Lady" rateOfProd = {10} currentCount = {lunchLadies} saladCount = {count} 
-        currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady)}/> 
+        currentCost = {lunchLadiesCost} onClick={() => buyItem(lunchLadiesCost, 10, setLadyCost, setLady, lunchLadies, "Lunch Ladies")}/> 
         : <UnknownItem unlock = {10} delayVal = {600}/> 
         }
    
 
       
      { displayItem(farms) ? <ItemBuyer itemName="Farm" rateOfProd = {50} currentCount = {farms} saladCount = {count} 
-      currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms)}/> 
+      currentCost = {farmCost} onClick={() => buyItem(farmCost, 50, setFarmCost, setFarms, farms, "Farms")}/> 
       : <UnknownItem unlock = {500} delayVal = {1100}/> 
       }
     
     
       {
        displayItem(mafia) ? <ItemBuyer itemName="Underground Salad Mafia" rateOfProd = {115} currentCount = {mafia} saladCount = {count} 
-            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia)}/> 
-            : displayUnknown(lunchLadies) && <UnknownItem unlock = {5000} />
+            currentCost = {mafiaCost} onClick={() => buyItem(mafiaCost, 115, setMafiaCost, setMafia, mafia, "Mafias")}/> 
+            : displayUnknown(lunchLadies) && <UnknownItem unlock = {5000}/>
       } 
       
       
       {
        displayItem(town) ? <ItemBuyer itemName="Tomato Town" rateOfProd = {500} currentCount = {town} saladCount = {count} 
-            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown)}/> 
-            : displayUnknown(farms) && <UnknownItem unlock = {15000} />
+            currentCost = {townCost} onClick={() => buyItem(townCost, 500, setTownCost, setTown, town, "Towns")}/> 
+            : displayUnknown(farms) && <UnknownItem unlock = {15000}/>
 
       } 
        
-       <AchievementHandler stopGame = {stopGame} totalSalads = {totalSalads} count = {count} rate = {rate} 
-        clickRate = {clickRate} unlockables = {unlockables} handSpinners = {handSpinners} handSpinnersCost = {handSpinnersCost}
-        lunchLadies = {lunchLadies} lunchLadiesCost = {lunchLadiesCost} farms = {farms} farmCost = {farmCost}
-        mafia = {mafia} mafiaCost = {mafiaCost} town = {town} townCost = {townCost} 
-        
-       reset = {reset}/>
       
       <div className = "header2"> 
         <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
+      </div>
+
+      <div className = "header2"> 
+        <p style= {{marginTop: 10, }}> Achievements found: <b> {achievementsNum} </b></p> 
       </div>
      
 

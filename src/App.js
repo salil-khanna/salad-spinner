@@ -48,31 +48,31 @@ const [arrayOfItems, setArray] = useState([
           text: "Your first salad! They grow up so fast :')",
           found: false,
       },
-      {
-        key: 2,
-        text: "30s on Deck: Solid work chief!",
-        found: false,
-    },  
-    {
-      key: 3,
-      text: "Nice.",
-      found: false,
-    },
-    {
-      key: 4,
-      text: "100s On The Board: I think this means you win now",
-      found: false,
-    },
+    //   {
+    //     key: 2,
+    //     text: "30s on Deck: Solid work chief!",
+    //     found: false,
+    // },  
+    // {
+    //   key: 3,
+    //   text: "Nice.",
+    //   found: false,
+    // },
+    // {
+    //   key: 4,
+    //   text: "100s On The Board: I think this means you win now",
+    //   found: false,
+    // },
     {
       key: 5,
       text: "Pausing the Game: Bathroom break I guess?",
       found: false,
   },
-    {
-      key: 6,
-      text: "Lucky 5s: Jeff Bezos Who?",
-      found: false,
-    },
+    // {
+    //   key: 6,
+    //   text: "Lucky 5s: Jeff Bezos Who?",
+    //   found: false,
+    // },
     
     {
       key: 7,
@@ -173,8 +173,13 @@ const [arrayOfItems, setArray] = useState([
           return !achievement.found
       }).map( (achievement) => {
           if (achievement.key === val) {
+              if (val === 6) {
+                console.log(achievements);
+                console.log(achievement.found);
+                console.log("why u here")
+              }
               achievementToastGen(achievement.text)
-              return {...achievement, found: true}
+              return {key: achievement.key, text: achievement.text, found: true}
           } else {
               return achievement;
           }
@@ -315,7 +320,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
         return item;
       }
     })
-    console.log(copyArrayItems);
+    
     if (checkAllPast(5, copyArrayItems)) {
       adjustAchievements(6)
     } 
@@ -393,7 +398,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 27) {
+    if (achievementsNum === 23) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -525,7 +530,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
         <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
-        <p > Achievements found: <b> {achievementsNum} / 27 </b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 23 </b></p> 
       </div>
 
       <div > 

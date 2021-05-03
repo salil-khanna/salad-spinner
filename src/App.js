@@ -89,6 +89,11 @@ const [arrayOfItems, setArray] = useState([
     text: "Visiting My Site: Awwwww, thank you so much <3",
     found: false,
 }, 
+{
+  key: 10,
+  text: 'Viewing the Code: console.log("Ha, Nerd.")',
+  found: false,
+}, 
   {
     key: 13,
     text: "Pass 10k All Time Salads: Started from the bottom now we here.",
@@ -251,6 +256,10 @@ function viewSite() {
   adjustAchievements(9);
 }
 
+function viewCode() {
+  adjustAchievements(10);
+}
+
 function adjDisp(valueToBeFixed) {
    if (valueToBeFixed > Math.pow(10,15) ) {
     return roundTo(valueToBeFixed/Math.pow(10,15)) + " quadrillion";
@@ -384,7 +393,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 26) {
+    if (achievementsNum === 27) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -519,7 +528,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       </div>
 
       <div className = "header2"> 
-        <p style= {{marginTop: 10, }}> Achievements found: <b> {achievementsNum} / 26 </b></p> 
+        <p style= {{marginTop: 10, }}> Achievements found: <b> {achievementsNum} / 27 </b></p> 
       </div>
      
 
@@ -528,7 +537,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
           Developed by Salil Khanna @ <a href="https://www.salilkhanna.com" 
           target= "_blank" style = {{color:"goldenrod"}} rel="noreferrer" onClick = {viewSite}> salilkhanna.com</a> with React JS
           <br></br>
-          <a href="https://github.com/salil-khanna/salad-spinner" target= "_blank" style = {{color:"goldenrod"}} 
+          <a href="https://github.com/salil-khanna/salad-spinner" onClick = {viewCode} target= "_blank" style = {{color:"goldenrod"}} 
           rel="noreferrer"> View the Code Here </a>
         </footer>
       </div>

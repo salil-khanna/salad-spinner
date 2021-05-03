@@ -173,11 +173,11 @@ const [arrayOfItems, setArray] = useState([
           return !achievement.found
       }).map( (achievement) => {
           if (achievement.key === val) {
-              if (val === 6) {
-                console.log(achievements);
-                console.log(achievement.found);
-                console.log("why u here")
-              }
+              // if (val === 6) {
+              //   console.log(achievements);
+              //   console.log(achievement.found);
+              //   console.log("why u here")
+              // }
               achievementToastGen(achievement.text)
               return {key: achievement.key, text: achievement.text, found: true}
           } else {

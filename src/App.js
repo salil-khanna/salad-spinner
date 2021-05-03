@@ -234,7 +234,16 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, itemName) {
     if (item === 0) {
       if (itemName === "Hand Spinners") {
         adjustAchievements(2);
+      } else if (itemName === "Lunch Ladies") {
+        adjustAchievements(9);
+      } else if (itemName === "Farms") {
+        adjustAchievements(10);
+      } else if (itemName === "Mafias") {
+        adjustAchievements(11);
+      } else if (itemName === "Towns") {
+        adjustAchievements(12);
       }
+
     }
 
     setCount(c => roundTo(c - cost))
@@ -268,10 +277,27 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, itemName) {
     if (count >= 15000 && town === -1) {
       setTown(0);
       setUnlockables(c => c - 1)
+      achievementToastGen("You unlocked all items! Now touch some grass.")
+
     }
-    
 
   }, [count, lunchLadies, farms, mafia, town])
+
+  /**
+ * Use Effect is for unlocking achivements
+ */
+   useEffect(() => {
+    if (handSpinners === 69 && lunchLadies === 69 && 
+      farms === 69 && mafia === 69 && town === 69 ) {
+      achievementToastGen("Nice.")
+    }
+
+    if (handSpinners === 100 && lunchLadies === 100 && 
+      farms === 100 && mafia === 100 && town === 100 ) {
+      achievementToastGen("100s On The Board: I think this means you win now")
+    }
+
+  }, [handSpinners, lunchLadies, farms, mafia, town])
 
   function displayItem(unlockVal) {
     return unlockVal !== -1;

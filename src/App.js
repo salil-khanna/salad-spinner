@@ -94,6 +94,11 @@ const [arrayOfItems, setArray] = useState([
   text: 'Viewing the Code: console.log("Ha, Nerd.")',
   found: false,
 }, 
+{
+  key: 11,
+  text: "Buying In Red: Debt really isn't fun",
+  found: false,
+}, 
   {
     key: 13,
     text: "Pass 10k All Time Salads: Started from the bottom now we here.",
@@ -309,6 +314,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       draggable: true,
       progress: undefined,
       });
+    adjustAchievements(11);
   } else {
 
 
@@ -398,7 +404,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 23) {
+    if (achievementsNum === 21) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -530,7 +536,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
         <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
-        <p > Achievements found: <b> {achievementsNum} / 23 </b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 21 </b></p> 
       </div>
 
       <div > 

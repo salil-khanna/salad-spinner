@@ -522,15 +522,11 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       } 
        
       
-      <div className = "header2"> 
-        <p style= {{marginTop: 10, }}> <b>{unlockables === 0 ? "No more items to unlock! :D" : 
+      <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
+        <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 27 </b></p> 
       </div>
-
-      <div className = "header2"> 
-        <p style= {{marginTop: 10, }}> Achievements found: <b> {achievementsNum} / 27 </b></p> 
-      </div>
-     
 
       <div > 
         <footer>

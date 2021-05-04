@@ -408,7 +408,6 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       setTown(0);
       setUnlockables(c => c - 1)
       achievementToastGen("You unlocked all items! Now touch some grass.")
-
     }
 
   }, [count, lunchLadies, farms, mafia, town])

@@ -37,164 +37,51 @@ const [arrayOfItems, setArray] = useState([
   {val: 0, key: 100} , {val: 0, key: 101}, 
   {val: 0, key: 102} , {val: 0, key: 103}, 
   {val: 0, key: 104}
-
 ]);
 
-////////////////////////////////////////////////////////////////////////
-    ////////////////////////// SECTION FOR ACHIEVEMENTS CODE ///////////////
-    ////////////////////////////////////////////////////////////////////////
-    let achievementList = [
-      {
-          key: 1,
-          text: "Your first salad! They grow up so fast :')",
-          found: false,
-      },
-      {
-        key: 2,
-        text: "30s on Deck: Solid work chief!",
-        found: false,
-    },  
-    {
-      key: 3,
-      text: "Nice.",
-      found: false,
-    },
-    {
-      key: 4,
-      text: "100s On The Board: I think this means you win now",
-      found: false,
-    },
-    {
-      key: 5,
-      text: "Pausing the Game: Bathroom break I guess?",
-      found: false,
-  },
-    {
-      key: 6,
-      text: "Lucky 5s: Jeff Bezos Who?",
-      found: false,
-    },
-    
-    {
-      key: 7,
-      text: "Salads per Second @ 50: Now this is spinning out of control...",
-      found: false,
-  },
-  {
-      key: 8,
-      text: "Salads per Click @ 10: Your fingers must be tired",
-      found: false,
-  }, 
-  {
-    key: 9,
-    text: "Visiting My Site: Awwwww, thank you so much <3",
-    found: false,
-}, 
-{
-  key: 10,
-  text: 'Viewing the Code: console.log("Ha, Nerd.")',
-  found: false,
-}, 
-{
-  key: 11,
-  text: "Buying In Red: Debt really isn't fun",
-  found: false,
-}, 
-  {
-    key: 13,
-    text: "Pass 10k All Time Salads: Started from the bottom now we here.",
-    found: false,
-},
-      {
-          key: 100,
-          text: "Own 1 Hand Spinner: We All Start Somewhere",
-          found: false,
-      }, 
-      {
-          key: 101,
-          text: "Own 1 Lunch Lady: Whats for lunch?",
-          found: false,
-      },
-      {
-          key: 102,
-          text: "Own 1 Farm: Land Development!",
-          found: false,
-      },
-      {
-          key: 103,
-          text: "Own 1 Mafia: Doesn't the mafia usually own you?",
-          found: false,
-      },
-      {
-          key: 104,
-          text: "Own 1 Town: Fortnite x Salad Spinner When?",
-          found: false,
-      },
-      {
-        key: 110,
-        text: "Own 10 Hand Spinners: Spin Spin Spin away, Spin Spin Spin all day...",
-        found: false,
-    }, 
-    {
-      key: 111,
-      text: "Own 10 Lunch Ladies: This cafeteria is getting a bit crowded",
-      found: false,
-  },
-  {
-      key: 112,
-      text: "Own 10 Farms: I think we'll need a bigger scarecrow...",
-      found: false,
-  },
-  {
-      key: 113,
-      text: "Own 10 Mafias: Didn't know the GodFather loved Salad",
-      found: false,
-  },
-  {
-      key: 114,
-      text: "Own 10 Towns: ~Number 1 Victory Royale~",
-      found: false,
-  },
-  {
-    key: 120,
-    text: "Own 50 Hand Spinners: Automation is the future",
-    found: false,
-}, 
-{
-  key: 121,
-  text: "Own 50 Lunch Ladies: I think Michelle Obama's plan is working",
-  found: false,
-},
-{
-  key: 122,
-  text: "Own 50 Farms: We are Farmers, bum ba dum bum bum bum bum",
-  found: false,
-},
-{
-  key: 123,
-  text: "Own 50 Mafias: You're a Salad Tycoon",
-  found: false,
-},
-{
-  key: 124,
-  text: "Own 50 Towns: ~Just Wiped Out Tomato Town~",
-  found: false,
-},
-
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////// SECTION FOR ACHIEVEMENTS CODE ///////////////
+  ////////////////////////////////////////////////////////////////////////
+  let achievementList = [
+    { key: 1, text: "Your first salad! They grow up so fast :')", found: false, },
+    { key: 2, text: "30s on Deck: Solid work chief!", found: false, },  
+    { key: 3, text: "Nice.", found: false, },
+    { key: 4, text: "100s On The Board: I think this means you win now", found: false, },
+    { key: 5, text: "Pausing the Game: Bathroom break I guess?", found: false, },
+    { key: 6, text: "Lucky 5s: Jeff Bezos Who?", found: false, },
+    { key: 7, text: "Salads per Second @ 50: Now this is spinning out of control...", found: false, },
+    { key: 8, text: "Salads per Click @ 10: Your fingers must be tired", found: false, }, 
+    { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, }, 
+    { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, }, 
+    { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, }, 
+    { key: 13, text: "Pass 10k All Time Salads: Started from the bottom now we here.", found: false, },
+    { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, }, 
+    { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, },
+    { key: 102, text: "Own 1 Farm: Land Development!", found: false, },
+    { key: 103, text: "Own 1 Mafia: Doesn't the mafia usually own you?", found: false, },
+    { key: 104, text: "Own 1 Town: Fortnite x Salad Spinner When?", found: false, },
+    { key: 110, text: "Own 10 Hand Spinners: Spin Spin Spin away, Spin Spin Spin all day...", found: false, }, 
+    { key: 111, text: "Own 10 Lunch Ladies: This cafeteria is getting a bit crowded", found: false, },
+    { key: 112, text: "Own 10 Farms: I think we'll need a bigger scarecrow...", found: false, },
+    { key: 113, text: "Own 10 Mafias: Didn't know the GodFather loved Salad", found: false, },
+    { key: 114, text: "Own 10 Towns: ~Number 1 Victory Royale~", found: false, },
+    { key: 120, text: "Own 50 Hand Spinners: Automation is the future", found: false,}, 
+    { key: 121, text: "Own 50 Lunch Ladies: I think Michelle Obama's plan is working", found: false, },
+    { key: 122, text: "Own 50 Farms: We are Farmers, bum ba dum bum bum bum bum", found: false, },
+    { key: 123, text: "Own 50 Mafias: So thats why it's called Italian Caesar Dressing", found: false, },
+    { key: 124, text: "Own 50 Towns: ~Just Wiped Out Tomato Town~", found: false, },
     ];
+
     const [achievements, setAchievements] = useState(achievementList)
     const [achievementsNum, setAchievementsNum] = useState(0);
     const [confetti, setConfetti] = useState(0);
 
     const {width, height} = useWindowSize();
     useEffect(() => {
-      
       setConfetti(100);
-      
       setTimeout(() => {
         setConfetti(0);
       }, 3000)
-
     }, [achievementsNum]);
 
     function achievementToastGen(text) {
@@ -208,7 +95,6 @@ const [arrayOfItems, setArray] = useState([
         draggable: true,
         progress: undefined,
         });
-        
     }
 
     const adjustAchievements = (val) => {
@@ -222,9 +108,10 @@ const [arrayOfItems, setArray] = useState([
               return achievement;
           }
       }))
-}
+    }
 
-
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
 
 useEffect(() => {
@@ -321,7 +208,6 @@ function adjDisp(valueToBeFixed) {
 
 
 function checkAllPast(pastVal, copyArrayItems) {
-
   const val = copyArrayItems.every((item) => 
     item.val >= pastVal
   );
@@ -350,7 +236,6 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     adjustAchievements(11);
   } else {
 
-
     let copyArrayItems = arrayOfItems;
     copyArrayItems = copyArrayItems.map((item) => {
       if (item.key === achievementKey) {
@@ -374,7 +259,6 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     }
 
     setArray(copyArrayItems);
-
     
     if (item === 0) {
      adjustAchievements(achievementKey);
@@ -385,15 +269,12 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     if (item === 49) {
       adjustAchievements(achievementKey + 20);
     }
+
     setCount(c => roundTo(c - cost))
     setRate(c => c + rateAdj);
     updateRateAchieve(rateAdj);
     itemCostAdj(c => roundTo(c * 1.1));
     itemNumAdj(c => c + 1);
-
-    
-
-
 
   }
   
@@ -427,8 +308,8 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
 
 
   /**
- * Use Effect is for unlocking achivements related to achievementsNum
- */
+  * Use Effect is for unlocking achivements related to achievementsNum
+  */
    useEffect(() => {
 
     if (achievementsNum === 5) {
@@ -455,48 +336,47 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     return prevVal > -1;
   }
 
+  async function resetGame() {
 
-
-    async function resetGame() {
-
-      const willDelete = await swal({
-        title: "Are you sure you want to reset your progress?",
-        icon: "warning",
-        dangerMode: true,
-        buttons: ["Cancel", "Ok"],
-      });
+    const willDelete = await swal({
+      title: "Are you sure you want to reset your progress?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Cancel", "Ok"],
+    });
+    
+    if (willDelete) {
       
-      if (willDelete) {
-        
-        setTotal(0);
-        setRate(0);
-        setClickRate(1);
-        setCount(0);
-        setGameState(false);
-    
-        setUnlockables(4);
-    
-        setSpinners(0);
-        setSpinnerCost(15);
-        setLady(-1);
-        setLadyCost(100);
-        setFarms(-1);
-        setFarmCost(1100);
-        setMafia(-1);
-        setMafiaCost(6000);
-        setTown(-1);
-        setTownCost(20000);
-    
-        setArray([{val: 0, key: 100} , {val: 0, key: 101}, 
-          {val: 0, key: 102} , {val: 0, key: 103}, 
-          {val: 0, key: 104}])
-        setAchievements(achievementList);
-        setAchievementsNum(0);
-        await swal("Your game has been reset!", "", "success");
-        
-      }
-    
+      setTotal(0);
+      setRate(0);
+      setClickRate(1);
+      setCount(0);
+      setGameState(false);
+  
+      setUnlockables(4);
+  
+      setSpinners(0);
+      setSpinnerCost(15);
+      setLady(-1);
+      setLadyCost(100);
+      setFarms(-1);
+      setFarmCost(1100);
+      setMafia(-1);
+      setMafiaCost(6000);
+      setTown(-1);
+      setTownCost(20000);
+      setConfetti(0);
+      
+      setArray([{val: 0, key: 100} , {val: 0, key: 101}, 
+        {val: 0, key: 102} , {val: 0, key: 103}, 
+        {val: 0, key: 104}])
+      setAchievements(achievementList);
+      setAchievementsNum(0);
+      await swal("Your game has been reset!", "", "success");
+      
     }
+  
+  }
 
 
   return (

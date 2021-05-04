@@ -154,6 +154,31 @@ const [arrayOfItems, setArray] = useState([
       text: "Own 10 Towns: ~Number 1 Victory Royale~",
       found: false,
   },
+  {
+    key: 120,
+    text: "Own 50 Hand Spinners: Automation is the future",
+    found: false,
+}, 
+{
+  key: 121,
+  text: "Own 50 Lunch Ladies: I think Michelle Obama's plan is working",
+  found: false,
+},
+{
+  key: 122,
+  text: "Own 50 Farms: We are Farmers, bum ba dum bum bum bum bum",
+  found: false,
+},
+{
+  key: 123,
+  text: "Own 50 Mafias: You're a Salad Tycoon",
+  found: false,
+},
+{
+  key: 124,
+  text: "Own 50 Towns: ~Just Wiped Out Tomato Town~",
+  found: false,
+},
 
     ];
     const [achievements, setAchievements] = useState(achievementList)
@@ -323,7 +348,6 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     })
     
     if (item === 4 && checkAllPast(5, copyArrayItems)) {
-      console.log("sup bitches");
       adjustAchievements(6)
     } 
     if (item === 29 && checkAllPast(30, copyArrayItems)) {
@@ -344,6 +368,9 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
     } 
     if (item === 9) {
       adjustAchievements(achievementKey + 10);
+    }
+    if (item === 49) {
+      adjustAchievements(achievementKey + 20);
     }
     setCount(c => roundTo(c - cost))
     setRate(c => c + rateAdj);
@@ -400,7 +427,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 25) {
+    if (achievementsNum === 30) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -532,7 +559,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
         <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
-        <p > Achievements found: <b> {achievementsNum} / 25 </b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 30 </b></p> 
       </div>
 
       <div > 

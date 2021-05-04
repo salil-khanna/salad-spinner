@@ -48,31 +48,31 @@ const [arrayOfItems, setArray] = useState([
           text: "Your first salad! They grow up so fast :')",
           found: false,
       },
-    //   {
-    //     key: 2,
-    //     text: "30s on Deck: Solid work chief!",
-    //     found: false,
-    // },  
-    // {
-    //   key: 3,
-    //   text: "Nice.",
-    //   found: false,
-    // },
-    // {
-    //   key: 4,
-    //   text: "100s On The Board: I think this means you win now",
-    //   found: false,
-    // },
+      {
+        key: 2,
+        text: "30s on Deck: Solid work chief!",
+        found: false,
+    },  
+    {
+      key: 3,
+      text: "Nice.",
+      found: false,
+    },
+    {
+      key: 4,
+      text: "100s On The Board: I think this means you win now",
+      found: false,
+    },
     {
       key: 5,
       text: "Pausing the Game: Bathroom break I guess?",
       found: false,
   },
-    // {
-    //   key: 6,
-    //   text: "Lucky 5s: Jeff Bezos Who?",
-    //   found: false,
-    // },
+    {
+      key: 6,
+      text: "Lucky 5s: Jeff Bezos Who?",
+      found: false,
+    },
     
     {
       key: 7,
@@ -178,11 +178,6 @@ const [arrayOfItems, setArray] = useState([
           return !achievement.found
       }).map( (achievement) => {
           if (achievement.key === val) {
-              // if (val === 6) {
-              //   console.log(achievements);
-              //   console.log(achievement.found);
-              //   console.log("why u here")
-              // }
               achievementToastGen(achievement.text)
               return {key: achievement.key, text: achievement.text, found: true}
           } else {
@@ -327,16 +322,17 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       }
     })
     
-    if (checkAllPast(5, copyArrayItems)) {
+    if (item === 4 && checkAllPast(5, copyArrayItems)) {
+      console.log("sup bitches");
       adjustAchievements(6)
     } 
-    if (checkAllPast(30, copyArrayItems)) {
+    if (item === 29 && checkAllPast(30, copyArrayItems)) {
       adjustAchievements(2)
     } 
-     if (checkAllPast(69, copyArrayItems)) {
+     if (item === 68 && checkAllPast(69, copyArrayItems)) {
       adjustAchievements(3)
     } 
-     if (checkAllPast(100, copyArrayItems)) {
+     if (item === 99 && checkAllPast(100, copyArrayItems)) {
       adjustAchievements(4)
     }
 
@@ -404,7 +400,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 21) {
+    if (achievementsNum === 25) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -536,7 +532,7 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
       <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
         <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
-        <p > Achievements found: <b> {achievementsNum} / 21 </b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 25 </b></p> 
       </div>
 
       <div > 

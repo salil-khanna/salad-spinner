@@ -1,5 +1,8 @@
-import PropTypes from 'prop-types'
-
+/**
+ * 
+ * @param {*} param0 props destructered
+ * @returns code for a basic button with inputted function, text, and color
+ */
 const Button = ({color, text, onClick}) => {
     
     return (
@@ -9,17 +12,6 @@ const Button = ({color, text, onClick}) => {
             </button>  
         </div>
     )
-}
-
-Button.defaultProps = {
-    color : 'steelblue',
-
-}
-
-Button.propTypes = {
-    text: PropTypes.string,
-    color: PropTypes.string,
-
 }
 
 export default Button

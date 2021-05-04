@@ -85,11 +85,11 @@ function App() {
       if (achievementsNum === 0) {
         setConfetti(0);
       } else {
-        setConfetti(100);
+        setConfetti(200);
       }
       setTimeout(() => {
         setConfetti(0);
-      }, 3000)
+      }, 2000)
     }, [achievementsNum]);
 
     /**
@@ -465,7 +465,7 @@ function App() {
   return (
 
     <div className="container">
-      <Confetti width={width} height={height} numberOfPieces={confetti} /> 
+      <Confetti width={width} height={height} numberOfPieces={confetti} gravity={0.5}/> 
 
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} viewSite = {viewSite}/>
 

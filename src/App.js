@@ -465,7 +465,7 @@ function App() {
   return (
 
     <div className="container">
-      <Confetti width={width} height={height} numberOfPieces={confetti} gravity={0.5}/> 
+      <Confetti width={width} height={height} numberOfPieces={confetti} gravity={0.3}/> 
 
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} viewSite = {viewSite}/>
 

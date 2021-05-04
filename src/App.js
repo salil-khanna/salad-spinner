@@ -189,7 +189,7 @@ const [arrayOfItems, setArray] = useState([
     const {width, height} = useWindowSize();
     useEffect(() => {
       
-      setConfetti(200);
+      setConfetti(100);
       
       setTimeout(() => {
         setConfetti(0);

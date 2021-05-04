@@ -6,7 +6,8 @@ import {useState, useEffect } from 'react'
 import UnknownItem from './components/UnknownItem';
 import swal from 'sweetalert';
 import { toast, ToastContainer } from "react-toastify";
-
+import {useWindowSize} from 'react-use';
+import Confetti from 'react-confetti'
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -183,10 +184,22 @@ const [arrayOfItems, setArray] = useState([
     ];
     const [achievements, setAchievements] = useState(achievementList)
     const [achievementsNum, setAchievementsNum] = useState(0);
+    const [confetti, setConfetti] = useState(0);
+
+    const {width, height} = useWindowSize();
+    useEffect(() => {
+      
+      setConfetti(200);
+      
+      setTimeout(() => {
+        setConfetti(0);
+      }, 3000)
+
+    }, [achievementsNum]);
 
     function achievementToastGen(text) {
       setAchievementsNum(c => c + 1);
-      return toast.dark(text, {
+      return  toast.dark(text, {
         position: "bottom-center",
         autoClose: 20000,
         hideProgressBar: false,
@@ -489,7 +502,8 @@ function buyItem(cost, rateAdj, itemCostAdj, itemNumAdj, item, achievementKey) {
   return (
      
     <div className="container">
-     
+     <Confetti width={width} height={height} numberOfPieces={confetti}/> 
+
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} viewSite = {viewSite}/>
 
 

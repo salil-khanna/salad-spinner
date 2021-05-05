@@ -15,6 +15,7 @@ function App() {
   const [stopGame, setGameState] = useState(false);
 
   const [totalSalads, setTotal] = useState(0);
+  const [totalHandSalads, setTotalHandSalads] = useState(0);
 
   const [count, setCount] = useState(0);
   const [rate, setRate] = useState(0);
@@ -54,7 +55,7 @@ function App() {
     { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, }, 
     { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, }, 
     { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, }, 
-    { key: 13, text: "Pass 10k All Time Salads: Started from the bottom now we here.", found: false, },
+    { key: 13, text: "Clicked 10k All Time Salads: Started from the bottom now we here.", found: false, },
     { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, }, 
     { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, },
     { key: 102, text: "Own 1 Farm: Land Development!", found: false, },
@@ -163,11 +164,12 @@ function App() {
     if (totalSalads === 0) {
       adjustAchievements(1);
     }
-    if (totalSalads >= 9999) {
+    if (totalHandSalads + addVal >= 9999) {
       adjustAchievements(13);
     }
     setCount(c => c + parseInt(addVal));
     setTotal(c => c + parseInt(addVal));
+    setTotalHandSalads(c => c + parseInt(addVal));
 
   }
 
@@ -430,6 +432,7 @@ function App() {
     if (willDelete) {
       
       setTotal(0);
+      setTotalHandSalads(0);
       setRate(0);
       setClickRate(1);
       setCount(0);

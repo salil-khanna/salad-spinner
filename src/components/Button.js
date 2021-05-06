@@ -3,7 +3,7 @@
  * @param {*} param0 props destructered
  * @returns code for a basic button with inputted function, text, and color
  */
-const Button = ({color, text, onClick}) => {
+const Button = ({color, text, onClick }) => {
     
     return (
         <div>
@@ -13,5 +13,6 @@ const Button = ({color, text, onClick}) => {
         </div>
     )
 }
+
 
 export default Button

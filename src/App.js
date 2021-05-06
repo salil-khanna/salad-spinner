@@ -1,14 +1,42 @@
-import './App.css';
+//Imports for components
 import Header from './components/Header'
 import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
-import {useState, useEffect } from 'react'
 import UnknownItem from './components/UnknownItem';
+import DisplayAchievement from './components/DisplayAchievement';
 import swal from 'sweetalert';
+import Confetti from 'react-confetti'
+
+//Imports for react hooks and tools
+import {useState, useEffect } from 'react';
 import { toast, ToastContainer } from "react-toastify";
 import {useWindowSize} from 'react-use';
-import Confetti from 'react-confetti'
+
+//Imports for style sheets
+import './App.css';
 import "react-toastify/dist/ReactToastify.css";
+
+//imports for images
+import reach5 from './images/5.png'
+import reach30 from './images/30.jpg'
+import reach69 from './images/69.png'
+import reach100 from './images/100.jpg'
+import down from './images/down.png'
+import farm from './images/farm.jpg'
+import heart from './images/heart.png'
+import lunchLady from './images/lunch-lady.jpg'
+import mafiaPic from './images/mafia.jpg'
+import townPic from './images/town.jpg'
+import nerd from './images/nerd.png'
+import pause from './images/pause.png'
+import pointer from './images/pointer.png'
+import salad from './images/salad-achievement.jpg'
+import spinner from './images/spinner.png'
+import unlock from './images/unlock.jpg'
+import achieveAll from './images/trophy.png'
+import achieve5 from './images/achieve5.jpg'
+import achieve15 from './images/achieve15.jpg'
+
 
 function App() {
 
@@ -44,33 +72,40 @@ function App() {
   ////////////////////////// SECTION FOR ACHIEVEMENTS CODE ///////////////
   ////////////////////////////////////////////////////////////////////////
   let achievementList = [
-    { key: 1, text: "Your first salad! They grow up so fast :')", found: false, },
-    { key: 2, text: "30s on Deck: Solid work chief!", found: false, },  
-    { key: 3, text: "Nice.", found: false, },
-    { key: 4, text: "100s On The Board: I think this means you win now", found: false, },
-    { key: 5, text: "Pausing the Game: Bathroom break I guess?", found: false, },
-    { key: 6, text: "Lucky 5s: Jeff Bezos Who?", found: false, },
-    { key: 7, text: "Salads per Second @ 50: Now this is spinning out of control...", found: false, },
-    { key: 8, text: "Salads per Click @ 10: Your fingers must be tired", found: false, }, 
-    { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, }, 
-    { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, }, 
-    { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, }, 
-    { key: 13, text: "Clicked 10k All Time Salads: Started from the bottom now we here.", found: false, },
-    { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, }, 
-    { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, },
-    { key: 102, text: "Own 1 Farm: Land Development!", found: false, },
-    { key: 103, text: "Own 1 Mafia: Doesn't the mafia usually own you?", found: false, },
-    { key: 104, text: "Own 1 Town: Fortnite x Salad Spinner When?", found: false, },
-    { key: 110, text: "Own 10 Hand Spinners: Spin Spin Spin away, Spin Spin Spin all day...", found: false, }, 
-    { key: 111, text: "Own 10 Lunch Ladies: This cafeteria is getting a bit crowded", found: false, },
-    { key: 112, text: "Own 10 Farms: I think we'll need a bigger scarecrow...", found: false, },
-    { key: 113, text: "Own 10 Mafias: Didn't know the GodFather loved Salad", found: false, },
-    { key: 114, text: "Own 10 Towns: ~Number 1 Victory Royale~", found: false, },
-    { key: 120, text: "Own 50 Hand Spinners: Automation is the future", found: false,}, 
-    { key: 121, text: "Own 50 Lunch Ladies: I think Michelle Obama's plan is working", found: false, },
-    { key: 122, text: "Own 50 Farms: We are Farmers, bum ba dum bum bum bum bum", found: false, },
-    { key: 123, text: "Own 50 Mafias: So thats why it's called Italian Caesar Dressing", found: false, },
-    { key: 124, text: "Own 50 Towns: ~Just Wiped Out Tomato Town~", found: false, },
+    { key: 1, text: "Your first salad! They grow up so fast :')", found: false, image: reach5},
+    { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, image: down}, 
+    { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, image: spinner}, 
+    { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, image: lunchLady},
+    { key: 7, text: "Salads per Second @ 50: Now this is spinning out of control...", found: false, image: salad},
+    { key: 102, text: "Own 1 Farm: Land Development!", found: false, image: farm},
+    { key: 8, text: "Salads per Click @ 10: Your fingers must be tired", found: false, image: pointer}, 
+    { key: 103, text: "Own 1 Mafia: Doesn't the mafia usually own you?", found: false, image: mafiaPic},
+    { key: 12, text: "Clicked 10k All Time Salads: Started from the bottom now we here.", found: false, image: pointer},
+    { key: 104, text: "Own 1 Town: Fortnite x Salad Spinner When?", found: false, image: townPic},
+    { key: 6, text: "Lucky 5s: Jeff Bezos Who?", found: false, image: reach5},
+    { key: 110, text: "Own 10 Hand Spinners: Spin Spin Spin away, Spin Spin Spin all day...", found: false, image: spinner}, 
+    { key: 111, text: "Own 10 Lunch Ladies: This cafeteria is getting a bit crowded", found: false, image: lunchLady},
+    { key: 112, text: "Own 10 Farms: I think we'll need a bigger scarecrow...", found: false, image: farm},
+    { key: 113, text: "Own 10 Mafias: Didn't know the GodFather loved Salad", found: false, image: mafiaPic},
+    { key: 114, text: "Own 10 Towns: ~Number 1 Victory Royale~", found: false, image: townPic },
+    { key: 2, text: "30s on Deck: Solid work chief!", found: false, image: reach30},  
+    { key: 120, text: "Own 50 Hand Spinners: Automation is the future", found: false, image: spinner}, 
+    { key: 121, text: "Own 50 Lunch Ladies: I think Michelle Obama's plan is working", found: false, image: lunchLady},
+    { key: 122, text: "Own 50 Farms: We are Farmers, bum ba dum bum bum bum bum", found: false, image: farm},
+    { key: 123, text: "Own 50 Mafias: So thats why it's called Italian Caesar Dressing", found: false, image: mafiaPic},
+    { key: 124, text: "Own 50 Towns: ~Just Wiped Out Tomato Town~", found: false, image: townPic },
+    { key: 3, text: "Nice.", found: false, image: reach69},
+    { key: 4, text: "100s On The Board: I think this means you win now", found: false, image: reach100},
+    { key: 5, text: "Pausing the Game: Bathroom break I guess?", found: false, image: pause},
+    { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, image: heart}, 
+    { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, image: nerd}, 
+
+    { key: 13, text: "You unlocked all items! Now touch some grass.", found: false, image: unlock},
+    { key: 14, text: "5 achievements: You've hit the big leagues!", found: false, image: achieve5},
+    { key: 15, text: "15 achievements: I think you should pick up another hobby", found: false, image: achieve15}, 
+    { key: 16, text: "Unlocked All Achievements: Go home, I'm out of things for you to do", found: false, image: achieveAll}, 
+    
+   
     ];
 
     const [achievements, setAchievements] = useState(achievementList)
@@ -118,17 +153,19 @@ function App() {
      * @param {*} val the key for achievement list
      */
     const adjustAchievements = (val) => {
-     setAchievements( achievements.filter( (achievement) => {
-          return !achievement.found
-      }).map( (achievement) => {
-          if (achievement.key === val) {
+     setAchievements( achievements.map( (achievement) => {
+          if (!achievement.found && achievement.key === val) {
               achievementToastGen(achievement.text)
-              return {key: achievement.key, text: achievement.text, found: true}
+              return {key: achievement.key, text: achievement.text, found: true, image: achievement.image}
           } else {
               return achievement;
           }
       }))
     }
+
+
+
+    
 
   ///////////////////////////////////////////////////////////////////
   /////////// END OF SETTING STATES AND STUFF ///////////////////////
@@ -165,7 +202,7 @@ function App() {
       adjustAchievements(1);
     }
     if (totalHandSalads + addVal >= 9999) {
-      adjustAchievements(13);
+      adjustAchievements(12);
     }
     setCount(c => c + parseInt(addVal));
     setTotal(c => c + parseInt(addVal));
@@ -353,6 +390,21 @@ function App() {
    * Use Effect is for unlocking items
    */
   useEffect(() => {
+    /**
+     * Helps in remapping the list of achievemets so that they will not be repeated, no Toast
+     * 
+     * @param {*} val the key for achievement list
+     */
+     const adjustAchievementsNoToast = (val) => {
+      setAchievements( achievements.map( (achievement) => {
+           if (!achievement.found && achievement.key === val) {
+               return {key: achievement.key, text: achievement.text, found: true, image: achievement.image}
+           } else {
+               return achievement;
+           }
+       }))
+     }
+
     if (count >= 10 && lunchLadies === -1) {
       setLady(0);
       setUnlockables(c => c - 1)
@@ -371,29 +423,47 @@ function App() {
       setTown(0);
       setUnlockables(c => c - 1)
       achievementToastGen("You unlocked all items! Now touch some grass.")
+      adjustAchievementsNoToast(13);
     }
 
-  }, [count, lunchLadies, farms, mafia, town])
+  }, [count, lunchLadies, farms, mafia, town, achievements])
 
   
   /**
-   * Use Effect is for unlocking achivements related to achievementsNum
+   * Use Effect is for unlocking achivements related to achievementsNum and unlockables
    */
   useEffect(() => {
+    /**
+     * Helps in remapping the list of achievemets so that they will not be repeated, no Toast
+     * 
+     * @param {*} val the key for achievement list
+     */
+    const adjustAchievementsNoToast = (val) => {
+      setAchievements( achievements.map( (achievement) => {
+           if (!achievement.found && achievement.key === val) {
+               return {key: achievement.key, text: achievement.text, found: true, image: achievement.image}
+           } else {
+               return achievement;
+           }
+       }))
+     }
 
     if (achievementsNum === 5) {
       achievementToastGen("5 achievements: You've hit the big leagues!");
+      adjustAchievementsNoToast(14);
     }
 
     if (achievementsNum === 15) {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
+      adjustAchievementsNoToast(15);
     }
 
     if (achievementsNum === 30) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
+      adjustAchievementsNoToast(16);
     }
 
-  }, [achievementsNum])
+  }, [achievementsNum, achievements])
 
 
   /**
@@ -537,6 +607,9 @@ function App() {
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
         <p > Achievements found: <b> {achievementsNum} / 30 </b></p> 
       </div>
+
+      <DisplayAchievement achievements = {achievements}/>
+
 
       <div > 
         <footer>

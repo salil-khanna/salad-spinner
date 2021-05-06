@@ -1,6 +1,6 @@
 # Salad Spinner: A Healthy Alternative to Cookie Clicker (A React JS application) 
 
-[Play the game here](https://relaxed-spence-acbac3.netlify.app/)
+[Play the game here](https://salad-spinner.netlify.app/)
 
 One day during finals I became overally obssed with the game [cookie clicker](https://orteil.dashnet.org/cookieclicker/) and I wanted to create a replica, not only to play for my own enjoymnt, but to also practice my JavaScript skills and learn the React Framework along the way.
 

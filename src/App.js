@@ -60,7 +60,7 @@ function App() {
     { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, }, 
     { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, }, 
     { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, }, 
-    { key: 12, text: "Disabling Confetti: Party Pooper", found: false, }, 
+    { key: 12, text: "Disabling Confetti: Party Pooper.", found: false, }, 
     { key: 13, text: "Clicked 10k All Time Salads: Started from the bottom now we here.", found: false, },
     { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, }, 
     { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, },

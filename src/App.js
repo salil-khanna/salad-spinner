@@ -1,13 +1,18 @@
-import './App.css';
+//Imports For Components
 import Header from './components/Header'
 import Button from './components/Button'
 import ItemBuyer from './components/ItemBuyer'
-import {useState, useEffect } from 'react'
 import UnknownItem from './components/UnknownItem';
+import Confetti from 'react-confetti'
 import swal from 'sweetalert';
+
+//Imports for Hooks
+import {useState, useEffect } from 'react'
 import { toast, ToastContainer } from "react-toastify";
 import {useWindowSize} from 'react-use';
-import Confetti from 'react-confetti'
+
+//Imports for Styling
+import './App.css';
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -55,6 +60,7 @@ function App() {
     { key: 9, text: "Visiting My Site: Awwwww, thank you so much <3", found: false, }, 
     { key: 10, text: 'Viewing the Code: console.log("Ha, Nerd.")', found: false, }, 
     { key: 11, text: "Buying In Red: Debt really isn't fun", found: false, }, 
+    { key: 12, text: "Disabling Confetti: Party Pooper", found: false, }, 
     { key: 13, text: "Clicked 10k All Time Salads: Started from the bottom now we here.", found: false, },
     { key: 100, text: "Own 1 Hand Spinner: We All Start Somewhere", found: false, }, 
     { key: 101, text: "Own 1 Lunch Lady: Whats for lunch?", found: false, },
@@ -76,6 +82,7 @@ function App() {
     const [achievements, setAchievements] = useState(achievementList)
     const [achievementsNum, setAchievementsNum] = useState(0);
     const [confetti, setConfetti] = useState(0);
+    const [showConfetti, setShowConfetti] = useState(true);
 
     const {width, height} = useWindowSize();
 
@@ -227,6 +234,15 @@ function App() {
    */
   function viewCode() {
     adjustAchievements(10);
+  }
+
+  
+  /**
+   * Generates an achievement for disabling the confetti
+   */
+   function changeConfetti(e) {
+    setShowConfetti(e.currentTarget.checked)
+    adjustAchievements(12);
   }
 
   /**
@@ -389,7 +405,7 @@ function App() {
       achievementToastGen("15 achievements: I think you should pick up another hobby");
     }
 
-    if (achievementsNum === 30) {
+    if (achievementsNum === 31) {
       achievementToastGen("Unlocked All Achievements: Go home, I'm out of things for you to do");
     }
 
@@ -451,7 +467,7 @@ function App() {
       setTown(-1);
       setTownCost(20000);
       
-
+      setShowConfetti(true);
       setArray([{val: 0, key: 100} , {val: 0, key: 101}, 
         {val: 0, key: 102} , {val: 0, key: 103}, 
         {val: 0, key: 104}])
@@ -468,7 +484,7 @@ function App() {
   return (
 
     <div className="container">
-      <Confetti width={width} height={height} numberOfPieces={confetti} gravity={0.3}/> 
+      {showConfetti && <Confetti width={width} height={height} numberOfPieces={confetti} gravity={0.3}/> }
 
       <Header onClick={resetGame} stopGame={stopGame} pauseGame = {changeGame} viewSite = {viewSite}/>
 
@@ -484,14 +500,12 @@ function App() {
         pauseOnHover={false}
       />
       
-      <p className="header3"> <b>Salad Stats</b></p>
+      <p className="header3" > <b>Salad Stats</b></p>
 
-      {/* turn this into a component */}
       <div className = "header2">
         <p>Total Salads: {adjDisp(count)} </p>        
       </div>
-
-      {/* Add an image to click instead of a button to manually create salads */}
+   
       <div className = "header2">
          <p >Salads per Second: {adjDisp(rate)} </p>  
          <Button color = "limeGreen" text = 'Click to Add Salad!' onClick={() => onclick1(clickRate)} />       
@@ -535,7 +549,13 @@ function App() {
       <div className = "header2" style = {{marginTop: 10, justifyContent: 'space-between'}}> 
         <p > <b>{unlockables === 0 ? "No more items to unlock! :D" : 
         `Keep Making Salads to Unlock ${unlockables} More Items!!` }</b></p> 
-        <p > Achievements found: <b> {achievementsNum} / 30 </b></p> 
+        <p > Achievements found: <b> {achievementsNum} / 31 </b></p> 
+       
+      </div>
+      
+      <div style ={{ marginTop: 10}}>
+        <p style={{float: 'left', }}><b>Click to {showConfetti ? "Disable" : "Enable"} Confetti </b></p>
+        <input type='checkbox' style={{ margin: 5, marginLeft: 10, }} checked = {showConfetti} value = {showConfetti} onChange={changeConfetti}/>
       </div>
 
       <div > 

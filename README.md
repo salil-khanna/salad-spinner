@@ -2,7 +2,7 @@
 
 [Play the game here](https://salad-spinner.netlify.app/)
 
-One day during finals I became overally obssed with the game [cookie clicker](https://orteil.dashnet.org/cookieclicker/) and I wanted to create a replica, not only to play for my own enjoymnt, but to also practice my JavaScript skills and learn the React Framework along the way.
+One day during finals I became overally obsessed with the game [cookie clicker](https://orteil.dashnet.org/cookieclicker/) and I wanted to create a replica, not only to play for my own enjoymnt, but to also practice my JavaScript skills and learn the React Framework along the way.
 
 ## Getting Started with Create React App
 
